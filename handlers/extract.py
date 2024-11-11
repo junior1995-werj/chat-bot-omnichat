@@ -1,7 +1,6 @@
 import numpy as np
 import pickle
 import nltk
-from config import user_history
 from nltk.stem import WordNetLemmatizer
 
 from .questions import Movie
@@ -33,9 +32,6 @@ def bag_of_words(writing, words):
     return(np.array(bag))
 
 
-def registrar_interacao(name_movie, movie_obj):
-    user_history[name_movie].append(movie_obj)
-
 def class_prediction(writing, model):
 
     prevision = bag_of_words(writing, words)
@@ -52,24 +48,18 @@ def class_prediction(writing, model):
 def get_response(intents, intents_json, writing):
     tag = intents[0]['intent']
     list_of_intents = intents_json['intents']
-    for idx in list_of_intents:
-        if idx['tag'] == tag:
-            if tag == "bem_vindo": 
-                result = idx['responses']
-                break
-            else:
-                try:
-                    movie_name = Movie()._find_name_movie(writing)
-                    if user_history[movie_name]:
-                        movie = user_history[movie_name]
-                        result = movie[0].processar_tag(tag, movie_name)
-                        break
-                    else:
-                        movie = Movie()
-                        result = movie.processar_tag(tag, movie_name)
-                        registrar_interacao(movie.name, movie)
-                        break
-                except: 
-                    return "Desculpe não entendi."
-          
+    try:
+        for idx in list_of_intents:
+
+            if idx['tag'] == tag:
+                if tag == "bem_vindo": 
+                    result = idx['responses']
+                    break
+                else:
+                    movie = Movie()
+                    result = movie.processar_tag(tag, writing)
+                    break
+    except:
+        return "Desculpe não consegui encontrar nada relacionado ao assunto!"
+    
     return result

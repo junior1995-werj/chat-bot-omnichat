@@ -7,9 +7,6 @@ from handlers.extract import class_prediction, get_response
 from keras.models import load_model
 from PIL import Image, ImageTk
 from io import BytesIO
-from config import user_history
-
-user_history["best_genrer_user"].append({})
 
 model = load_model('model.h5')
 

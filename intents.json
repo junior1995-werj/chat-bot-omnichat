@@ -32,7 +32,7 @@
     },
     {
       "tag": "type_of_movie",
-      "patterns": ["Dê-me uma recomendação de filme com base no meu gosto por genero.", "genero", "recomendacao de filme"],
+      "patterns": ["Dê-me uma recomendação de filme com base no meu gosto por", "genero", "recomendacao de filme"],
       "responses": "",
       "context": [""]
     },

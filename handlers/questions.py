@@ -1,7 +1,8 @@
 import random
 import requests
 import ast
-from config import settings, user_history
+from unidecode import unidecode
+from config import settings
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -16,7 +17,6 @@ class Movie:
         self.cast_movie = ""
         self.synopsis_movie = ""
         self.casts_movie = ""
-
 
     def _set_values(self):
         
@@ -39,7 +39,6 @@ class Movie:
             
             url = f"{settings.API_URL}movie/{self.id}?api_key={settings.API_KEY}&language=pt-BR"
             response = self._get_api(url)
-            self.type_of_movie = self.validate_genres(response['genres'])
         else: 
             pass
 
@@ -84,22 +83,22 @@ class Movie:
     
 
     def get_type_of_movie(self, *args):
-        best_genrer_user = user_history["best_genrer_user"][0]
-        try:
-            genrer = max(best_genrer_user, key=lambda k: best_genrer_user[k]['count'])
+        url = f"{settings.API_URL}genre/movie/list?api_key={settings.API_KEY}&language=pt-BR"
+        response = self._get_api(url)
+        dict_genres = response['genres']
 
-            url = f"{settings.API_URL}discover/movie?api_key={settings.API_KEY}&language=pt-BR&with_genres={user_history['best_genrer_user'][0][genrer]['id']}"
-            response = self._get_api(url)
+        for value in dict_genres:
+            if unidecode(value['name'].lower()) in unidecode(args[1].lower()):
+                url = f"{settings.API_URL}discover/movie?api_key={settings.API_KEY}&language=pt-BR&with_genres={value['id']}"
+                response = self._get_api(url)
 
-            response = random.sample(response['results'], 4)
-            text_return = f"Seu genero de filme mais pesquisado é {genrer}, sugestoes que você pode gostar: \n"
+                response = random.sample(response['results'], 4)
+                text_return = f"Você escolheu o genero {value['name']}, sugestoes que você pode gostar: \n"
 
-            for movie in response:
-                text_return +=f"    - Filme: {movie['title']}, nota: {movie['vote_average']}\n"
+                for movie in response:
+                    text_return +=f"    - Filme: {movie['title']}, nota: {movie['vote_average']}\n"
 
-            text_return += f"Espero que goste!"
-        except Exception as ex: 
-            text_return = "Sinto muito, ainda não tenho informações suficiente para executar essa tarefa!"
+                text_return + f"Espero que goste!"
 
         return text_return
     
@@ -120,31 +119,21 @@ class Movie:
         return text_return
 
 
-    def processar_tag(self, tag, *args):
+    def processar_tag(self, tag, writing):
         method_name = f"get_{tag}"
         metodo = getattr(self, method_name, None)
+
+        movie_name = ""
+        if tag in ['cast', "synopsis", "avaliation", "similar"]:
+            movie_name = self._find_name_movie(writing)
         
+        args=(movie_name,writing)
+
         if callable(metodo):
             return metodo(*args)
         else:
             return f"Sinto muito, ainda não estou preparado para esta ação!"
     
-
-    @staticmethod
-    def validate_genres(genres:list):
-        
-        list_values = []
-        for genre in genres:
-            if genre['name'] in user_history["best_genrer_user"][0].keys():
-                user_history["best_genrer_user"][0][genre['name']]['count'] = user_history["best_genrer_user"][0][genre['name']]['count'] + 1
-            else:
-                user_history["best_genrer_user"][0][genre['name']] = {"count": 1, "id": genre['id']}
-            
-            list_values.append(genre['name'])
-
-        return genre
-
-
     @staticmethod
     def _get_api(url): 
         headers = {"accept": "application/json"}
