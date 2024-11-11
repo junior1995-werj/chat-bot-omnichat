@@ -56,7 +56,8 @@ https://api.themoviedb.org/3/
 - Consumo de API: Use a API de filmes para obter informações relevantes.
 
 ## Executar 
-
+- renomear arquivo "variables.py" para ".env"
+  
 ```shell
 python bot.py
 ```
