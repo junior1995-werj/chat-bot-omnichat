@@ -28,12 +28,6 @@ poetry install
 poetry shell
 ```
 
-- Atualizar as env vars:
-
-```shell
-cp local.env .env
-```
-
 ## Requisitos: 
 #### Tarefas:
 1. Coleta de Dados:
