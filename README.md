@@ -61,3 +61,11 @@ https://api.themoviedb.org/3/
 ```shell
 python bot.py
 ```
+
+
+### Documentação de apoio na criação do projeto:
+
+- https://developer.themoviedb.org/
+- https://medium.com/luizalabs/como-criar-um-chatbot-usando-aprendizado-profundo-e-python-47821402367
+- https://www.hashtagtreinamentos.com/langchain-python 
+- https://platform.openai.com/docs/quickstart?language-preference=python
