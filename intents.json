@@ -1,0 +1,52 @@
+{
+  "intents": [
+    {
+      "tag": "bem_vindo",
+      "patterns": ["oi", "bom dia", "boa tarde", "boa noite", "olá", "ola"],
+      "responses": "Olá, eu sou seu assistente virtual para tirar duvidas e sugerir filmes para voce, no que posso te ajudar?",
+      "context": [""]
+    },
+    {
+      "tag": "cast",
+      "patterns": ["Qual é o elenco do filme", "elenco"],
+      "responses": "",
+      "context": [""]
+    },
+    {
+      "tag": "synopsis",
+      "patterns": ["Qual é a sinopse do filme", "sinopse do filme"],
+      "responses": "sinopse",
+      "context": [""]
+    },
+    {
+      "tag": "avaliation",
+      "patterns": ["Qual é a avaliacao do filme", "avaliação do filme"],
+      "responses": "avaliação",
+      "context": [""]
+    },
+    {
+      "tag": "top_three_best",
+      "patterns": ["Quais são os filmes populares no momento?", "filmes populares", "melhores filmes no momento"],
+      "responses": "",
+      "context": [""]
+    },
+    {
+      "tag": "type_of_movie",
+      "patterns": ["Dê-me uma recomendação de filme com base no meu gosto por genero.", "genero", "recomendacao de filme"],
+      "responses": "",
+      "context": [""]
+    },
+    {
+      "tag": "similar",
+      "patterns": ["Quero um filme similar", "filme similar", "filme parecido", "semelhante"],
+      "responses": "",
+      "context": [""]
+    },
+    {
+      "tag": "anything_else",
+      "patterns": [],
+      "responses": "",
+      "context": [""]
+    }
+  ]
+}

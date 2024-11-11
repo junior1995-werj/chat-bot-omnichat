@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "bot-teste-omnichat"
+version = "0.1.0"
+description = "chat desenvolvido para teste de conhecimento"
+authors = ["Junior Werner <juninhowerner31@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+langchain = "^0.3.7"
+langchain-openai = "^0.2.6"
+nltk = "^3.9.1"
+keras = "^3.6.0"
+tensorflow-io-gcs-filesystem = "0.31.0"
+tensorflow = "^2.18.0"
+prettyconf = "^2.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
