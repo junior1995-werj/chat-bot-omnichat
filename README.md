@@ -43,12 +43,12 @@ https://api.themoviedb.org/3/
 ```
 2. Funcionalidades do Chatbot:
     - O chatbot deve ser capaz de responder às seguintes perguntas:
-        ■ “Qual é o elenco do filme ‘Nome do Filme’?”
-        ■ “Qual é a sinopse do filme ‘Nome do Filme’?”
-        ■ “Qual é a avaliação do filme ‘Nome do Filme’?”
-        ■ “Quais são os filmes populares no momento?”
-        ■ “Dê-me uma recomendação de filme com base no meu gostopor ‘Gênero’.”
-    ■ “Quero um filme similar ao 'Nome do FIlme'"
+        - “Qual é o elenco do filme ‘Nome do Filme’?”
+        - “Qual é a sinopse do filme ‘Nome do Filme’?”
+        - “Qual é a avaliação do filme ‘Nome do Filme’?”
+        - “Quais são os filmes populares no momento?”
+        - “Dê-me uma recomendação de filme com base no meu gostopor ‘Gênero’.”
+        - “Quero um filme similar ao 'Nome do FIlme'"
 
 3. Conceitos a serem Abordados:
 - Agentes: Implemente um agente que gerencie as interações do chatbot com os usuários.
